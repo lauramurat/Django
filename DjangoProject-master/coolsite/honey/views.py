@@ -29,11 +29,19 @@ def index(request):
 def about(request):
     return render(request, 'honey/about.html', {'menu': menu, 'title': 'Біз жайлы'})
 
+
+
+
+
 def addproduct(request):
     if request.method == 'POST':
         form = AddProductForm(request.POST)
         if form.is_valid():
-            print(form.cleaned_data)
+            try:
+                Product.objects.create(**form.cleaned_data)
+                return redirect('home')
+            except:
+                form.add_error(None, 'Error')
     else:
         form = AddProductForm()
     return render(request, 'honey/addproduct.html', {'menu':menu,'form':form, 'title' : 'Продукт қосу'})
