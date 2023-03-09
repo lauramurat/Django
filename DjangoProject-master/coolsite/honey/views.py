@@ -35,13 +35,10 @@ def about(request):
 
 def addproduct(request):
     if request.method == 'POST':
-        form = AddProductForm(request.POST)
+        form = AddProductForm(request.POST, request.FILES)
         if form.is_valid():
-            try:
-                Product.objects.create(**form.cleaned_data)
+                form.save()
                 return redirect('home')
-            except:
-                form.add_error(None, 'Error')
     else:
         form = AddProductForm()
     return render(request, 'honey/addproduct.html', {'menu':menu,'form':form, 'title' : 'Продукт қосу'})
