@@ -1,8 +1,11 @@
 from django.core.exceptions import PermissionDenied, BadRequest
 from django.http import HttpResponse, HttpResponseNotFound, Http404, HttpResponseBadRequest, HttpResponseServerError
 from django.shortcuts import render, redirect, get_object_or_404
+from django.urls import reverse_lazy
+from django.views.generic import ListView, DetailView, CreateView
 from .models import *
 from .forms import *
+
 
 menu = [
     {'title': "Біз жайлы", 'url_name':'about'},
@@ -12,66 +15,114 @@ menu = [
     {'title': "Тіркелу", 'url_name': 'register'}
 ]
 
+class ProductHome(ListView):
+    model = Product
+    template_name = 'honey/index.html'
+    context_object_name = 'posts'
 
+    def get_context_data(self, *, object_list=None, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['menu'] = menu
+        context['title'] = 'Honey Skin'
+        context['cat_selected'] = 0
+        return context
 
-def index(request):
-    posts = Product.objects.all()
-    cats = Category.objects.all()
-    context = {
-        'posts': posts,
-        'cats': cats,
-        'menu': menu,
-        'title':'Basty bet',
-        'cat_selected':0,
-    }
-    return render(request, 'honey/index.html', context=context)
+    def get_queryset(self):
+        return Product.objects.filter(is_published = True)
+
+# def index(request):
+#     posts = Product.objects.all()
+#     cats = Category.objects.all()
+#     context = {
+#         'posts': posts,
+#         'cats': cats,
+#         'menu': menu,
+#         'title':'Basty bet',
+#         'cat_selected':0,
+#     }
+#     return render(request, 'honey/index.html', context=context)
 
 def about(request):
     return render(request, 'honey/about.html', {'menu': menu, 'title': 'Біз жайлы'})
 
+class AddProduct(CreateView):
+    form_class = AddProductForm
+    template_name = 'honey/addproduct.html'
+    success_url = reverse_lazy('home')
 
+    def get_context_data(self, *, object_list=None, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['title'] = 'Продукт қосу'
+        context['menu'] = menu
+        return context
 
-
-
-def addproduct(request):
-    if request.method == 'POST':
-        form = AddProductForm(request.POST, request.FILES)
-        if form.is_valid():
-                form.save()
-                return redirect('home')
-    else:
-        form = AddProductForm()
-    return render(request, 'honey/addproduct.html', {'menu':menu,'form':form, 'title' : 'Продукт қосу'})
+# def addproduct(request):
+#     if request.method == 'POST':
+#         form = AddProductForm(request.POST, request.FILES)
+#         if form.is_valid():
+#                 form.save()
+#                 return redirect('home')
+#     else:
+#         form = AddProductForm()
+#     return render(request, 'honey/addproduct.html', {'menu':menu,'form':form, 'title' : 'Продукт қосу'})
 
 def contact(request):
     return HttpResponse("Keri bailanys")
 
-def show_post(request, post_slug):
-    post = get_object_or_404(Product, slug=post_slug)
+class ShowPost(DetailView):
+    model = Product
+    template_name = 'honey/index.html'
+    slug_url_kwarg = 'post_slug'
+    context_object_name = 'post'
 
-    context = {
-        'post': post,
-        'menu': menu,
-        'name': post.name,
-        'cat_selected':post.cat_id,
+    def get_context_data(self, *, object_list=None, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['title'] = context['post']
+        context['menu'] = menu
+        return context
 
-    }
-    return render(request, 'honey/post.html', context=context)
+# def show_post(request, post_slug):
+#     post = get_object_or_404(Product, slug=post_slug)
+#
+#     context = {
+#         'post': post,
+#         'menu': menu,
+#         'name': post.name,
+#         'cat_selected':post.cat_id,
+#
+#     }
+#     return render(request, 'honey/post.html', context=context)
 
-def show_category(request, cat_id):
-    posts = Product.objects.filter(cat_id=cat_id)
+class ProductCategory(ListView):
+    model = Product
+    template_name = 'honey/index.html'
+    context_object_name = 'posts'
+    allow_empty = False
 
-    if len(posts) == 0:
-        raise Http404()
+    def get_queryset(self):
+        return Product.objects.filter(cat__slug = self.kwargs['cat_slug'], is_published = True)
 
+    def get_context_data(self, *, object_list=None, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['title'] = 'Категория - ' + str(context['posts'][0].cat)
+        context['menu'] = menu
+        context['cat_selected'] = context['posts'][0].cat_id
+        return context
 
-    context = {
-        'posts': posts,
-        'menu': menu,
-        'title': 'Basty bet',
-        'cat_selected': cat_id,
-    }
-    return render(request, 'honey/index.html', context=context)
+# def show_category(request, cat_id):
+#     posts = Product.objects.filter(cat_id=cat_id)
+#
+#     if len(posts) == 0:
+#         raise Http404()
+#
+#
+#     context = {
+#         'posts': posts,
+#         'menu': menu,
+#         'title': 'Basty bet',
+#         'cat_selected': cat_id,
+#     }
+#     return render(request, 'honey/index.html', context=context)
 
 def blog(request):
     return HttpResponse("Blog")
