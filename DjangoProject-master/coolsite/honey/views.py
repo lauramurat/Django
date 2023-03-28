@@ -1,31 +1,23 @@
+from django.contrib.auth.decorators import login_required
 from django.core.exceptions import PermissionDenied, BadRequest
 from django.http import HttpResponse, HttpResponseNotFound, Http404, HttpResponseBadRequest, HttpResponseServerError
 from django.shortcuts import render, redirect, get_object_or_404
 from django.urls import reverse_lazy
 from django.views.generic import ListView, DetailView, CreateView
+from django.contrib.auth.mixins import LoginRequiredMixin
 from .models import *
 from .forms import *
+from .utils import *
 
-
-menu = [
-    {'title': "Біз жайлы", 'url_name':'about'},
-    {'title': "Контактілер", 'url_name': 'contact'},
-    {'title': "Блог", 'url_name': 'blog'},
-    {'title': "Кіру", 'url_name': 'login'},
-    {'title': "Тіркелу", 'url_name': 'register'}
-]
-
-class ProductHome(ListView):
+class ProductHome(DataMixin, ListView):
     model = Product
     template_name = 'honey/index.html'
     context_object_name = 'posts'
 
     def get_context_data(self, *, object_list=None, **kwargs):
         context = super().get_context_data(**kwargs)
-        context['menu'] = menu
-        context['title'] = 'Honey Skin'
-        context['cat_selected'] = 0
-        return context
+        c_def = self.get_user_context(title = "Honey Skin")
+        return dict(list(context.items()) +list(c_def.items()))
 
     def get_queryset(self):
         return Product.objects.filter(is_published = True)
@@ -41,20 +33,21 @@ class ProductHome(ListView):
 #         'cat_selected':0,
 #     }
 #     return render(request, 'honey/index.html', context=context)
-
+@login_required
 def about(request):
     return render(request, 'honey/about.html', {'menu': menu, 'title': 'Біз жайлы'})
 
-class AddProduct(CreateView):
+class AddProduct(LoginRequiredMixin, DataMixin, CreateView):
     form_class = AddProductForm
     template_name = 'honey/addproduct.html'
     success_url = reverse_lazy('home')
+    login_url = reverse_lazy('home')
+    raise_exception = True
 
     def get_context_data(self, *, object_list=None, **kwargs):
         context = super().get_context_data(**kwargs)
-        context['title'] = 'Продукт қосу'
-        context['menu'] = menu
-        return context
+        c_def = self.get_user_context(title = "Add product")
+        return dict(list(context.items()) +list(c_def.items()))
 
 # def addproduct(request):
 #     if request.method == 'POST':
@@ -69,7 +62,7 @@ class AddProduct(CreateView):
 def contact(request):
     return HttpResponse("Keri bailanys")
 
-class ShowPost(DetailView):
+class ShowPost(DataMixin, DetailView):
     model = Product
     template_name = 'honey/index.html'
     slug_url_kwarg = 'post_slug'
@@ -77,9 +70,8 @@ class ShowPost(DetailView):
 
     def get_context_data(self, *, object_list=None, **kwargs):
         context = super().get_context_data(**kwargs)
-        context['title'] = context['post']
-        context['menu'] = menu
-        return context
+        c_def = self.get_user_context(title = context['post'])
+        return dict(list(context.items()) +list(c_def.items()))
 
 # def show_post(request, post_slug):
 #     post = get_object_or_404(Product, slug=post_slug)
@@ -93,7 +85,7 @@ class ShowPost(DetailView):
 #     }
 #     return render(request, 'honey/post.html', context=context)
 
-class ProductCategory(ListView):
+class ProductCategory(DataMixin, ListView):
     model = Product
     template_name = 'honey/index.html'
     context_object_name = 'posts'
@@ -104,10 +96,9 @@ class ProductCategory(ListView):
 
     def get_context_data(self, *, object_list=None, **kwargs):
         context = super().get_context_data(**kwargs)
-        context['title'] = 'Категория - ' + str(context['posts'][0].cat)
-        context['menu'] = menu
-        context['cat_selected'] = context['posts'][0].cat_id
-        return context
+        c_def = self.get_user_context(title = 'Category - ' + str(context['posts'][0].cat),
+                                      cat_selected = context['posts'][0].cat_id)
+        return dict(list(context.items()) +list(c_def.items()))
 
 # def show_category(request, cat_id):
 #     posts = Product.objects.filter(cat_id=cat_id)
