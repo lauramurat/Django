@@ -1,5 +1,6 @@
 from django.contrib.auth.decorators import login_required
 from django.core.exceptions import PermissionDenied, BadRequest
+from django.core.paginator import Paginator
 from django.http import HttpResponse, HttpResponseNotFound, Http404, HttpResponseBadRequest, HttpResponseServerError
 from django.shortcuts import render, redirect, get_object_or_404
 from django.urls import reverse_lazy
@@ -10,6 +11,7 @@ from .forms import *
 from .utils import *
 
 class ProductHome(DataMixin, ListView):
+    paginate_by = 3
     model = Product
     template_name = 'honey/index.html'
     context_object_name = 'posts'
@@ -33,9 +35,14 @@ class ProductHome(DataMixin, ListView):
 #         'cat_selected':0,
 #     }
 #     return render(request, 'honey/index.html', context=context)
-@login_required
+# @login_required
 def about(request):
-    return render(request, 'honey/about.html', {'menu': menu, 'title': 'Біз жайлы'})
+    contact_list = Product.objects.all()
+    paginator = Paginator(contact_list, 3)
+
+    page_number = request.GET.get('page')
+    page_obj = paginator.get_page(page_number)
+    return render(request, 'honey/about.html', {'page_obj': page_obj, 'menu': menu, 'title': 'Біз жайлы'})
 
 class AddProduct(LoginRequiredMixin, DataMixin, CreateView):
     form_class = AddProductForm

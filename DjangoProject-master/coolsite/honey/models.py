@@ -24,7 +24,7 @@ class Product(models.Model):
     class Meta:
         verbose_name = "Продуктілер"
         verbose_name_plural = "Продуктілер"
-        ordering = ['time_create','name']
+        ordering = ['id']
 
 
 
