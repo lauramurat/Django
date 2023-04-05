@@ -17,7 +17,7 @@ Including another URLconf
 
 from django.contrib import admin
 from django.urls import path, include
-
+from coolsite import settings
 from honey.views import *
 
 urlpatterns = [
@@ -29,3 +29,11 @@ handler404 = not_found
 handler403 = closed_access
 handler400 = bad_request
 
+if settings.DEBUG:
+    import debug_toolbar
+
+    urlpatterns =[
+        path('__debug__/', include(debug_toolbar.urls)),
+    ] + urlpatterns
+
+    urlpatterns += static(settings.MEDIA_URL, document_root = settings.MEDIA_ROOT)
