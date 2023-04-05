@@ -1,4 +1,7 @@
+from django.contrib.auth import logout, login
 from django.contrib.auth.decorators import login_required
+from django.contrib.auth.forms import AuthenticationForm
+from django.contrib.auth.views import LoginView
 from django.core.exceptions import PermissionDenied, BadRequest
 from django.core.paginator import Paginator
 from django.http import HttpResponse, HttpResponseNotFound, Http404, HttpResponseBadRequest, HttpResponseServerError
@@ -122,16 +125,51 @@ class ProductCategory(DataMixin, ListView):
 #     }
 #     return render(request, 'honey/index.html', context=context)
 
+
+
+class RegisterUser(DataMixin, CreateView):
+    form_class = RegisterUserForm
+    template_name = 'honey/register.html'
+    success_url = reverse_lazy('login')
+
+    def get_context_data(self, *, object_list=None, **kwargs):
+        context = super().get_context_data(**kwargs)
+        c_def = self.get_user_context(title="Register")
+        return dict(list(context.items()) + list(c_def.items()))
+
+    def form_valid(self, form):
+        user = form.save()
+        login(self.request, user)
+        return redirect('home')
+
+class LoginUser(DataMixin, LoginView):
+    form_class = LoginUserForm
+    template_name = 'honey/login.html'
+
+    def get_context_data(self, *, object_list=None, **kwargs):
+        context = super().get_context_data(**kwargs)
+        c_def = self.get_user_context(title="Authentication")
+        return dict(list(context.items()) + list(c_def.items()))
+
+    # def get_success_url(self):
+    #     return reverse_lazy('home')
+
+
+def logout_user(request):
+    logout(request)
+    return redirect('login')
+
+
 def blog(request):
     return HttpResponse("Blog")
 
 
 
-def login(request):
-    return HttpResponse("Avtorisaviya")
+# def login(request):
+#     return HttpResponse("Avtorisaviya")
 
-def register(request):
-    return HttpResponse("Tirkelu")
+# def register(request):
+#     return HttpResponse("Tirkelu")
 
 
 def categories(request,category):
