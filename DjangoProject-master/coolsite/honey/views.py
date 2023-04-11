@@ -7,7 +7,7 @@ from django.core.paginator import Paginator
 from django.http import HttpResponse, HttpResponseNotFound, Http404, HttpResponseBadRequest, HttpResponseServerError
 from django.shortcuts import render, redirect, get_object_or_404
 from django.urls import reverse_lazy
-from django.views.generic import ListView, DetailView, CreateView
+from django.views.generic import ListView, DetailView, CreateView, FormView
 from django.contrib.auth.mixins import LoginRequiredMixin
 from .models import *
 from .forms import *
@@ -39,6 +39,25 @@ class ProductHome(DataMixin, ListView):
 #     }
 #     return render(request, 'honey/index.html', context=context)
 # @login_required
+
+
+# def blog(request):
+#     return HttpResponse("Blog")
+
+class ContactFromView(DataMixin, FormView):
+    form_class = ContactForm
+    template_name ='honey/contact.html'
+    success_url = reverse_lazy('home')
+
+    def get_context_data(self, *, object_list=None, **kwargs):
+        context = super().get_context_data(**kwargs)
+        c_def = self.get_user_context(title="Keri bailanys")
+        return dict(list(context.items()) + list(c_def.items()))
+
+    def form_valid(selfself, form):
+        print(form.cleaned_data)
+        return redirect('home')
+
 def about(request):
     contact_list = Product.objects.all()
     paginator = Paginator(contact_list, 3)
@@ -160,9 +179,6 @@ def logout_user(request):
     logout(request)
     return redirect('login')
 
-
-def blog(request):
-    return HttpResponse("Blog")
 
 
 

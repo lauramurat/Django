@@ -13,21 +13,25 @@ Including another URLconf
     1. Import the include() function: from django.urls import include, path
     2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
 """
-
-
+from django.conf.urls.static import static
 from django.contrib import admin
 from django.urls import path, include
 from coolsite import settings
+from django.urls import path
 from honey.views import *
 
 urlpatterns = [
     path('admin/', admin.site.urls),
+    path('captcha/', include('captcha.urls')),
     path('', include('honey.urls')),
 ]
 
-handler404 = not_found
-handler403 = closed_access
-handler400 = bad_request
+# handler404 = not_found
+# handler403 = closed_access
+# handler400 = bad_request
+
+
+
 
 if settings.DEBUG:
     import debug_toolbar
