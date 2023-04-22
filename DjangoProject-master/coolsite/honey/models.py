@@ -1,5 +1,6 @@
 from django.db import models
 from django.urls import reverse
+from rest_framework import serializers
 
 class Product(models.Model):
     name = models.CharField(max_length=255, verbose_name='Аты')

@@ -19,10 +19,11 @@ from django.urls import path, include
 from coolsite import settings
 from django.urls import path
 from honey.views import *
-
+from honey.views import HoneyAPIView
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('captcha/', include('captcha.urls')),
+    path('api/v1/honeylist/', HoneyAPIView.as_view()),
     path('', include('honey.urls')),
 ]
 

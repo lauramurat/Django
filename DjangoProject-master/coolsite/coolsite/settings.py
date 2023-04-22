@@ -39,7 +39,8 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'debug_toolbar',
     'captcha',
-    'honey.apps.HoneyConfig'
+    'honey.apps.HoneyConfig',
+    'rest_framework',
 ]
 
 MIDDLEWARE = [

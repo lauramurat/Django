@@ -4,14 +4,47 @@ from django.contrib.auth.forms import AuthenticationForm
 from django.contrib.auth.views import LoginView
 from django.core.exceptions import PermissionDenied, BadRequest
 from django.core.paginator import Paginator
+from django.forms import model_to_dict
 from django.http import HttpResponse, HttpResponseNotFound, Http404, HttpResponseBadRequest, HttpResponseServerError
 from django.shortcuts import render, redirect, get_object_or_404
 from django.urls import reverse_lazy
 from django.views.generic import ListView, DetailView, CreateView, FormView
 from django.contrib.auth.mixins import LoginRequiredMixin
-from .models import *
+from rest_framework import generics
+from rest_framework.response import Response
+
+from .serializers import HoneySerializer
 from .forms import *
 from .utils import *
+from rest_framework.views import APIView
+
+# class HoneyAPIView(generics.ListAPIView):
+#     queryset = Product.objects.all()
+#     serializer_class = HoneySerializer
+
+
+class HoneyAPIView(APIView):
+    def get(self, request):
+        h = Product.objects.all()
+        return Response({'products': HoneySerializer(h, many=True).data})
+
+    def post(self,request):
+        serializers = HoneySerializer(data=request.data)
+        serializers.is_valid(raise_exception=True)
+
+        post_new = Product.objects.create(
+            name=request.data['name'],
+            brand=request.data['brand'],
+            content=request.data['content'],
+            price=request.data['price'],
+            cat_id=request.data['cat_id']
+        )
+        return Response({'product': HoneySerializer(post_new).data})
+
+
+
+
+
 
 class ProductHome(DataMixin, ListView):
     paginate_by = 3
