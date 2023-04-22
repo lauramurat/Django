@@ -23,6 +23,21 @@ class HoneySerializer(serializers.ModelSerializer):
     is_published = serializers.BooleanField(default=True)
     cat = serializers.IntegerField()
 
+    def create(self, validated_data):
+        return Product.objects.create(**validated_data)
+
+    def update(self, instance, validated_data):
+        instance.name = validated_data.get("title", instance.name)
+        instance.slug = validated_data.get("slug", instance.slug)
+        instance.brand = validated_data.get("brand", instance.brand)
+        instance.content = validated_data.get("content", instance.content)
+        instance.photo = validated_data.get("photo", instance.photo)
+        instance.price = validated_data.get("price", instance.price)
+        instance.time_update = validated_data.get("time_update", instance.time_update)
+        instance.is_published = validated_data.get("is_published", instance.is_published)
+        instance.cat = validated_data.get("cat", instance.cat)
+        instance.save()
+        return instance
 
 # def encode():
 #     model = HoneyModel('Penka', 'Penka is a good')

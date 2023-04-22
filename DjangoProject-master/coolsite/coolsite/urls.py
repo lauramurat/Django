@@ -24,6 +24,7 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('captcha/', include('captcha.urls')),
     path('api/v1/honeylist/', HoneyAPIView.as_view()),
+    path('api/v1/honeylist/<int:pk>', HoneyAPIView.as_view()),
     path('', include('honey.urls')),
 ]
 

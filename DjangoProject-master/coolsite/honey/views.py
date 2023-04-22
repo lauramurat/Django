@@ -31,17 +31,23 @@ class HoneyAPIView(APIView):
     def post(self,request):
         serializers = HoneySerializer(data=request.data)
         serializers.is_valid(raise_exception=True)
+        serializers.save()
 
-        post_new = Product.objects.create(
-            name=request.data['name'],
-            brand=request.data['brand'],
-            content=request.data['content'],
-            price=request.data['price'],
-            cat_id=request.data['cat_id']
-        )
-        return Response({'product': HoneySerializer(post_new).data})
+        return Response({'product': serializers.data})
 
+    def put(self,request, *args, **kwargs):
+        pk = kwargs.get("pk", None)
+        if not pk:
+            return Response({"error": "Method PUT not allowed"})
+        try:
+            instance = Product.objects.get(pk=pk)
+        except:
+            return Response({"error": "Object does not exists"})
 
+        serializers = HoneySerializer(data=request.data, instance=instance)
+        serializers.is_valid(raise_exception=True)
+        serializers.save()
+        return Response({"post": serializers.data})
 
 
 
