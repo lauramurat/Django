@@ -19,12 +19,16 @@ from django.urls import path, include
 from coolsite import settings
 from django.urls import path
 from honey.views import *
-from honey.views import HoneyAPIView
+from rest_framework import routers
+
+router = routers.SimpleRouter()
+router.register(r'honey', HoneyViewSet)
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('captcha/', include('captcha.urls')),
-    path('api/v1/honeylist/', HoneyAPIView.as_view()),
-    path('api/v1/honeylist/<int:pk>', HoneyAPIView.as_view()),
+    path('api/v1/', include(router.urls)),
+    # path('api/v1/honeylist/', HoneyViewSet.as_view({'get': 'list'})),
+    # path('api/v1/honeylist/<int:pk>/', HoneyViewSet.as_view({'put': 'update'})),
     path('', include('honey.urls')),
 ]
 

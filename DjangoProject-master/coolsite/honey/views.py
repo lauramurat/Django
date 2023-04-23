@@ -1,3 +1,4 @@
+
 from django.contrib.auth import logout, login
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.forms import AuthenticationForm
@@ -10,46 +11,39 @@ from django.shortcuts import render, redirect, get_object_or_404
 from django.urls import reverse_lazy
 from django.views.generic import ListView, DetailView, CreateView, FormView
 from django.contrib.auth.mixins import LoginRequiredMixin
-from rest_framework import generics
+from rest_framework import generics, viewsets, mixins
 from rest_framework.response import Response
+from rest_framework.viewsets import GenericViewSet
 
 from .serializers import HoneySerializer
 from .forms import *
 from .utils import *
 from rest_framework.views import APIView
 
+class HoneyViewSet(mixins.CreateModelMixin,
+                   mixins.RetrieveModelMixin,
+                   mixins.UpdateModelMixin,
+                   mixins.ListModelMixin,
+                   GenericViewSet):
+
+    queryset = Product.objects.all()
+    serializer_class = HoneySerializer
+
 # class HoneyAPIView(generics.ListAPIView):
 #     queryset = Product.objects.all()
 #     serializer_class = HoneySerializer
 
-
-class HoneyAPIView(APIView):
-    def get(self, request):
-        h = Product.objects.all()
-        return Response({'products': HoneySerializer(h, many=True).data})
-
-    def post(self,request):
-        serializers = HoneySerializer(data=request.data)
-        serializers.is_valid(raise_exception=True)
-        serializers.save()
-
-        return Response({'product': serializers.data})
-
-    def put(self,request, *args, **kwargs):
-        pk = kwargs.get("pk", None)
-        if not pk:
-            return Response({"error": "Method PUT not allowed"})
-        try:
-            instance = Product.objects.get(pk=pk)
-        except:
-            return Response({"error": "Object does not exists"})
-
-        serializers = HoneySerializer(data=request.data, instance=instance)
-        serializers.is_valid(raise_exception=True)
-        serializers.save()
-        return Response({"post": serializers.data})
-
-
+# class HoneyAPIList(generics.ListCreateAPIView):
+#     queryset = Product.objects.all()
+#     serializer_class = HoneySerializer
+#
+# class HoneyAPIUpdate(generics.UpdateAPIView):
+#     queryset = Product.objects.all()
+#     serializer_class = HoneySerializer
+#
+# class HoneyAPIDetailView(generics.RetrieveUpdateDestroyAPIView):
+#     queryset = Product.objects.all()
+#     serializer_class = HoneySerializer
 
 
 class ProductHome(DataMixin, ListView):

@@ -12,32 +12,36 @@ from rest_framework.parsers import JSONParser
 
 
 class HoneySerializer(serializers.ModelSerializer):
-    name = serializers.CharField(max_length=255)
-    slug = serializers.SlugField()
-    brand = serializers.CharField()
-    content = serializers.CharField()
-    photo = serializers.ImageField()
-    price = serializers.CharField(max_length=255)
-    time_create = serializers.DateTimeField(read_only=True)
-    time_update = serializers.DateTimeField(read_only=True)
-    is_published = serializers.BooleanField(default=True)
-    cat = serializers.IntegerField()
+    class Meta:
+        model = Product
+        fields = "__all__"
 
-    def create(self, validated_data):
-        return Product.objects.create(**validated_data)
-
-    def update(self, instance, validated_data):
-        instance.name = validated_data.get("title", instance.name)
-        instance.slug = validated_data.get("slug", instance.slug)
-        instance.brand = validated_data.get("brand", instance.brand)
-        instance.content = validated_data.get("content", instance.content)
-        instance.photo = validated_data.get("photo", instance.photo)
-        instance.price = validated_data.get("price", instance.price)
-        instance.time_update = validated_data.get("time_update", instance.time_update)
-        instance.is_published = validated_data.get("is_published", instance.is_published)
-        instance.cat = validated_data.get("cat", instance.cat)
-        instance.save()
-        return instance
+    # name = serializers.CharField(max_length=255)
+    # slug = serializers.SlugField()
+    # brand = serializers.CharField()
+    # content = serializers.CharField()
+    # photo = serializers.ImageField()
+    # price = serializers.CharField(max_length=255)
+    # time_create = serializers.DateTimeField(read_only=True)
+    # time_update = serializers.DateTimeField(read_only=True)
+    # is_published = serializers.BooleanField(default=True)
+    # cat = serializers.IntegerField()
+    #
+    # def create(self, validated_data):
+    #     return Product.objects.create(**validated_data)
+    #
+    # def update(self, instance, validated_data):
+    #     instance.name = validated_data.get("title", instance.name)
+    #     instance.slug = validated_data.get("slug", instance.slug)
+    #     instance.brand = validated_data.get("brand", instance.brand)
+    #     instance.content = validated_data.get("content", instance.content)
+    #     instance.photo = validated_data.get("photo", instance.photo)
+    #     instance.price = validated_data.get("price", instance.price)
+    #     instance.time_update = validated_data.get("time_update", instance.time_update)
+    #     instance.is_published = validated_data.get("is_published", instance.is_published)
+    #     instance.cat = validated_data.get("cat", instance.cat)
+    #     instance.save()
+    #     return instance
 
 # def encode():
 #     model = HoneyModel('Penka', 'Penka is a good')
