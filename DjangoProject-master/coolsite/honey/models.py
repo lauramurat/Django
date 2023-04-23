@@ -1,6 +1,8 @@
 from django.db import models
 from django.urls import reverse
 from rest_framework import serializers
+from django.contrib.auth.models import User
+
 
 class Product(models.Model):
     name = models.CharField(max_length=255, verbose_name='Аты')
@@ -13,6 +15,7 @@ class Product(models.Model):
     time_update = models.DateTimeField(auto_now=True, verbose_name='Өзгертілген уақыт')
     is_published = models.BooleanField(default=True, verbose_name='Публикациясы')
     cat = models.ForeignKey('Category', on_delete=models.PROTECT, verbose_name='Категориясы')
+    user = models.ForeignKey(User, verbose_name='Polzovatel', on_delete=models.CASCADE)
 
 
     def __str__(self):

@@ -21,14 +21,13 @@ from django.urls import path
 from honey.views import *
 from rest_framework import routers
 
-router = routers.SimpleRouter()
-router.register(r'honey', HoneyViewSet)
+
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('captcha/', include('captcha.urls')),
-    path('api/v1/', include(router.urls)),
-    # path('api/v1/honeylist/', HoneyViewSet.as_view({'get': 'list'})),
-    # path('api/v1/honeylist/<int:pk>/', HoneyViewSet.as_view({'put': 'update'})),
+    path('api/v1/honey/', HoneyAPIList.as_view()),
+    path('api/v1/honey/<int:pk>/', HoneyAPIUpdate.as_view()),
+    path('api/v1/honeydelete/<int:pk>/', HoneyAPIDestroy.as_view()),
     path('', include('honey.urls')),
 ]
 

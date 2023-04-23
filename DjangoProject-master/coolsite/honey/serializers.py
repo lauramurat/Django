@@ -12,6 +12,7 @@ from rest_framework.parsers import JSONParser
 
 
 class HoneySerializer(serializers.ModelSerializer):
+    user = serializers.HiddenField(default=serializers.CurrentUserDefault())
     class Meta:
         model = Product
         fields = "__all__"
