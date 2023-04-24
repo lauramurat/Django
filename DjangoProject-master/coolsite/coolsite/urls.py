@@ -15,7 +15,7 @@ Including another URLconf
 """
 from django.conf.urls.static import static
 from django.contrib import admin
-from django.urls import path, include
+from django.urls import path, include, re_path
 from coolsite import settings
 from django.urls import path
 from honey.views import *
@@ -25,9 +25,12 @@ from rest_framework import routers
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('captcha/', include('captcha.urls')),
+    path('api/v1/DjangoProject-auth/', include('rest_framework.urls')),
     path('api/v1/honey/', HoneyAPIList.as_view()),
     path('api/v1/honey/<int:pk>/', HoneyAPIUpdate.as_view()),
     path('api/v1/honeydelete/<int:pk>/', HoneyAPIDestroy.as_view()),
+    path('api/v1/auth/', include('djoser.urls')),
+    re_path(r'^auth/', include('djoser.urls.authtoken')),
     path('', include('honey.urls')),
 ]
 
