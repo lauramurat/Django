@@ -13,6 +13,7 @@ from django.views.generic import ListView, DetailView, CreateView, FormView
 from django.contrib.auth.mixins import LoginRequiredMixin
 from rest_framework import generics, viewsets, mixins
 from rest_framework.decorators import action
+from rest_framework.pagination import PageNumberPagination
 from rest_framework.permissions import IsAuthenticatedOrReadOnly, IsAdminUser
 from rest_framework.views import APIView
 from rest_framework.permissions import IsAuthenticatedOrReadOnly, IsAdminUser, IsAuthenticated
@@ -26,11 +27,16 @@ from .forms import *
 from .utils import *
 from rest_framework.views import APIView
 
+class HoneyAPIListPagination(PageNumberPagination):
+    page_size = 3
+    page_size_query_param = 'page_size'
+    max_page_size = 2
 
 class HoneyAPIList(generics.ListCreateAPIView):
     queryset = Product.objects.all()
     serializer_class = HoneySerializer
     permission_classes = (IsAuthenticatedOrReadOnly,)
+    pagination_class = HoneyAPIListPagination
 
 class HoneyAPIUpdate(generics.RetrieveUpdateAPIView):
     queryset = Product.objects.all()
