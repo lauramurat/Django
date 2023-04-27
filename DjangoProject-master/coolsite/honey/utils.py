@@ -6,8 +6,7 @@ menu = [
     {'title': "Біз жайлы", 'url_name':'about'},
     {'title': "Контактілер", 'url_name': 'contact'},
     {'title': "Блог", 'url_name': 'blog'},
-    {'title': "Кіру", 'url_name': 'login'},
-    {'title': "Тіркелу", 'url_name': 'register'}
+    {'title': "Косметикалар", 'url_name': 'kosmetics'},
 ]
 
 class DataMixin:

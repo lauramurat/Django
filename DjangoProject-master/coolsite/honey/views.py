@@ -80,18 +80,18 @@ class ProductHome(DataMixin, ListView):
 # def blog(request):
 #     return HttpResponse("Blog")
 
-class ContactFromView(DataMixin, FormView):
-    form_class = ContactForm
-    template_name ='honey/contact.html'
+class AddBailanys(DataMixin, FormView):
+    form_class = BailanysForm
+    template_name = 'honey/bailanys.html'
     success_url = reverse_lazy('home')
 
     def get_context_data(self, *, object_list=None, **kwargs):
         context = super().get_context_data(**kwargs)
-        c_def = self.get_user_context(title="Keri bailanys")
+        c_def = self.get_user_context(title="Bailanys")
         return dict(list(context.items()) + list(c_def.items()))
 
-    def form_valid(selfself, form):
-        print(form.cleaned_data)
+    def form_valid(self, form):
+        bailanys = form.save()
         return redirect('home')
 
 def about(request):
@@ -101,6 +101,33 @@ def about(request):
     page_number = request.GET.get('page')
     page_obj = paginator.get_page(page_number)
     return render(request, 'honey/about.html', {'page_obj': page_obj, 'menu': menu, 'title': 'Біз жайлы'})
+
+
+def blog(request):
+    contact_list = Product.objects.all()
+    paginator = Paginator(contact_list, 3)
+
+    page_number = request.GET.get('page')
+    page_obj = paginator.get_page(page_number)
+    return render(request, 'honey/blog.html', {'page_obj': page_obj, 'menu': menu, 'title': 'Біз жайлы'})
+
+
+class CosmeticHome(DataMixin, ListView):
+    paginate_by = 3
+    model = Product
+    template_name = 'honey/kosmetics.html'
+    context_object_name = 'posts'
+
+    def get_context_data(self, *, object_list=None, **kwargs):
+        context = super().get_context_data(**kwargs)
+        c_def = self.get_user_context(title = "Honey Skin")
+        return dict(list(context.items()) +list(c_def.items()))
+
+    def get_queryset(self):
+        return Product.objects.filter(is_published = True).select_related('cat')
+
+
+
 
 class AddProduct(LoginRequiredMixin, DataMixin, CreateView):
     form_class = AddProductForm
@@ -123,20 +150,23 @@ class AddProduct(LoginRequiredMixin, DataMixin, CreateView):
 #     else:
 #         form = AddProductForm()
 #     return render(request, 'honey/addproduct.html', {'menu':menu,'form':form, 'title' : 'Продукт қосу'})
+#
 
-def contact(request):
-    return HttpResponse("Keri bailanys")
 
 class ShowPost(DataMixin, DetailView):
     model = Product
-    template_name = 'honey/index.html'
+    template_name = 'honey/post.html'
     slug_url_kwarg = 'post_slug'
     context_object_name = 'post'
 
     def get_context_data(self, *, object_list=None, **kwargs):
         context = super().get_context_data(**kwargs)
-        c_def = self.get_user_context(title = context['post'])
-        return dict(list(context.items()) +list(c_def.items()))
+        c_def = self.get_user_context(title=context['post'])
+        return dict(list(context.items()) + list(c_def.items()))
+
+
+
+
 
 # def show_post(request, post_slug):
 #     post = get_object_or_404(Product, slug=post_slug)
@@ -152,19 +182,21 @@ class ShowPost(DataMixin, DetailView):
 
 class ProductCategory(DataMixin, ListView):
     model = Product
-    template_name = 'honey/index.html'
+    template_name = 'honey/kosmetics.html'
     context_object_name = 'posts'
     allow_empty = False
 
     def get_queryset(self):
-        return Product.objects.filter(cat__slug = self.kwargs['cat_slug'], is_published = True).select_related('cat')
+        return Product.objects.filter(cat__slug=self.kwargs['cat_slug'], is_published=True).select_related('cat')
 
     def get_context_data(self, *, object_list=None, **kwargs):
         context = super().get_context_data(**kwargs)
         c = Category.objects.get(slug=self.kwargs['cat_slug'])
-        c_def = self.get_user_context(title = 'Category - ' + str(c.name),
-                                      cat_selected = c.pk)
-        return dict(list(context.items()) +list(c_def.items()))
+        c_def = self.get_user_context(title='Категория - ' + str(c.name),
+                                      cat_selected=c.pk)
+        return dict(list(context.items()) + list(c_def.items()))
+
+
 
 # def show_category(request, cat_id):
 #     posts = Product.objects.filter(cat_id=cat_id)

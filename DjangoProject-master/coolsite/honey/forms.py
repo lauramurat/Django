@@ -51,8 +51,41 @@ class LoginUserForm(AuthenticationForm):
     # is_published = forms.BooleanField(label="Публикация", required=False, initial=True)
     # cat = forms.ModelChoiceField(queryset=Category.objects.all(), label="Категориялар",  empty_label="Категория тандалмады")
 
-class ContactForm(forms.Form):
-    name = forms.CharField(label='Имя',max_length=255)
-    email = forms.EmailField(label='Email')
-    content = forms.CharField(widget=forms.Textarea(attrs={'cols':60, 'rows': 10}))
-    captcha = CaptchaField()
+class BailanysForm(forms.Form):
+
+    class Meta:
+        model = Bailanys
+        fields = ['name', 'email', 'content']
+        widgets = {
+            'name': forms.TextInput(attrs={'class': 'form-input'}),
+            'email': forms.EmailInput(attrs={'cols': 60, 'rows': 10}),
+            'content': forms.Textarea(attrs={'cols': 60, 'rows': 10})
+        }
+
+        def clean_name(self):
+            name = self.cleaned_data['title']
+            if len(name) > 200:
+                raise ValidationError('Dlina prevyshaet 200 simvolov')
+            return name
+
+
+#
+# class BailanysForm(forms.ModelForm):
+#     def __init__(self, *args, **kwargs):
+#         super().__init__(*args, **kwargs)
+#
+#     class Meta:
+#         model = Bailanys
+#         fields = ['name', 'email', 'phone', 'content']
+#         widgets = {
+#             'name': forms.TextInput(attrs={'class': 'form-input'}),
+#             'email': forms.Textarea(attrs={'cols': 60, 'rows': 10}),
+#             'phone': forms.Textarea(attrs={'cols': 60, 'rows': 10}),
+#             'content': forms.Textarea(attrs={'cols': 60, 'rows': 10}),
+#         }
+#
+#         def clean_name(self):
+#             name = self.cleaned_data['title']
+#             if len(name) > 200:
+#                 raise ValidationError('Dlina prevyshaet 200 simvolov')
+#             return name

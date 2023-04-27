@@ -2,6 +2,7 @@ from django.db import models
 from django.urls import reverse
 from rest_framework import serializers
 from django.contrib.auth.models import User
+from captcha.fields import CaptchaField
 
 
 class Product(models.Model):
@@ -32,6 +33,24 @@ class Product(models.Model):
 
 
 
+class Bailanys(models.Model):
+    name = models.CharField(max_length=255, verbose_name='Аты')
+    email = models.CharField(max_length=255, verbose_name='Пошта')
+    content = models.CharField(max_length=255, verbose_name='Қосымша')
+    captcha = CaptchaField()
+
+
+    def __str__(self):
+        return self.name
+
+    class Meta:
+        verbose_name = "Байланыстар"
+        verbose_name_plural = "Байланыстар"
+        ordering = ['id']
+
+
+
+
 class Category(models.Model):
     name = models.CharField(max_length=100, db_index=True,verbose_name='Категория')
     slug = models.SlugField(max_length=255, unique=True, db_index=True, verbose_name="URL")
@@ -41,7 +60,7 @@ class Category(models.Model):
         return self.name
 
     def get_absolute_url(self):
-        return reverse('category', kwargs = {'cat_slug':self.slug})
+        return reverse('category', kwargs = { 'cat_slug': self.slug} )
 
     class Meta:
         verbose_name = "Категориялар"

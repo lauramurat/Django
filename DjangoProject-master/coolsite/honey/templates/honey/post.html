@@ -1,6 +1,18 @@
 {% extends 'honey/base.html' %}
 
 {% block content %}
+{#    <div class="header_extra d-flex flex-row align-items-center justify-content-end ml-auto">#}
+{#				<div class="social header_social">#}
+{#					<ul class="d-flex flex-row align-items-center justify-content-start">#}
+{#						<li><a href="{% url 'kosmetics' %}"><i class="fa fa-link" aria-hidden="true"></i> Артқа қайту </a></li>#}
+{#					</ul>#}
+{#				</div>#}
+{#			</div>#}
+    <div class="social header_social" style="margin-top: 150px; margin-left: 30px">
+            <ul class="d-flex flex-row align-items-left justify-content-start">
+            <a href="{% url 'kosmetics' %}">Артқа қайту<i class="fa fa-link" aria-hidden="true"></i></a>
+            </ul>
+    </div>
 <h1>{{post.name}}</h1>
 
 {% if post.photo %}
