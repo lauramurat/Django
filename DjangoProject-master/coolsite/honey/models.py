@@ -49,6 +49,17 @@ class Bailanys(models.Model):
         ordering = ['id']
 
 
+class New(models.Model):
+    email = models.CharField(max_length=255, verbose_name='Пошта')
+
+    def __str__(self):
+        return self.name
+
+    class Meta:
+        verbose_name = "Қосылулар"
+        verbose_name_plural = "Қосылулар"
+        ordering = ['id']
+
 
 
 class Category(models.Model):

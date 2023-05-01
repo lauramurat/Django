@@ -4,7 +4,7 @@
 {% block content %}
 <h1>{{title}}</h1>
 
-    {% load static %}
+{% load static %}
 	<div class="home d-flex flex-column align-items-start justify-content-end">
 		<div class="parallax_background parallax-window" data-parallax="scroll" data-image-src="{% static 'honey/images/contacttt.jpg' %}" data-speed="0.8"></div>
 		<div class="home_overlay"><img src="{% static 'honey/images/home_overlay.png' %}" alt=""></div>
@@ -14,145 +14,185 @@
 					<div class="col">
 						<div class="home_content">
 							<div class="home_title">Байланыс</div>
-							<div class="home_text">Бізбен байланыс орнату үшін төмендегіні толтырыңыз.</div>
-						</div>
+                        </div>
 					</div>
 				</div>
 			</div>
 		</div>
 	</div>
 
-	<!-- Contact -->
-    <div class="intro">
-		<div class="container">
-			<div class="row">
-                <div class="col-lg-6 intro_col">
-					<div class="intro_form_container">
-						<div class="intro_form_title">Байланысу үшін</div>
-						<div class="contact_content_text">
-							<p>Cұрағыңыз туындаған жағдайда, бізбен хабарласыңыз. Біз сіздің кез-келген туындаған сұрағыңыздың жауабын шешеміз.</p>
-						</div>
-						<div class="direct_line d-flex flex-row align-items-center justify-content-start">
-							<div class="direct_line_title text-center"> Телефон нөмірі:  </div>
-							<div class="direct_line_num text-center" style="background: #0c5460"> 87059160728 </div>
-						</div>
-						<div class="contact_info">
-							<ul>
-								<li class="d-flex flex-row align-items-start justify-content-start">
-									<div>Мекен-жайымыз: </div>
-									<div>Жандосова 55</div>
-								</li>
-								<li class="d-flex flex-row align-items-start justify-content-start">
-									<div>Call-center</div>
-									<div>+53 345 7953 32453</div>
-								</li>
-								<li class="d-flex flex-row align-items-start justify-content-start">
-									<div>E-mail</div>
-									<div>honey@gmail.com</div>
-								</li>
-							</ul>
-						</div>
-						<div class="contact_social">
-                            <h3> Біздің әлеуметтік желілер </h3>
-							<ul class="d-flex flex-row align-items-center justify-content-start">
-								<li><a href="https://ru.pinterest.com/heyhoney/"><i class="fa fa-pinterest" aria-hidden="true"></i></a></li>
-								<li><a href="https://api.whatsapp.com/send/?phone=%2B77064203395&text&type=phone_number&app_absent=0"><i class="fa fa-whatsapp" aria-hidden="true"></i></a></li>
-								<li><a href="https://twitter.com/"><i class="fa fa-twitter" aria-hidden="true"></i></a></li>
-								<li><a href="https://instagram.com/honeyskin.kz?igshid=YmMyMTA2M2Y="><i class="fa fa-instagram" aria-hidden="true"></i></a></li>
-								<li><a href="@KerbezLady_Bot"><i class="fa fa-telegram" aria-hidden="true"></i></a></li>
-								<li><a href="https://www.linkedin.com/feed/"><i class="fa fa-linkedin" aria-hidden="true"></i></a></li>
-							</ul>
-						</div>
-					</div>
-				</div>
-			</div>
+
+<html>
+    <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="description" content="Dr PRO template project">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" type="text/css" href="{% static 'honey/css/bootstrap-4.1.2/bootstrap.min.css' %}">
+    <link href="{% static 'honey/css/plugins/font-awesome-4.7.0/css/font-awesome.min.css' %}" rel="stylesheet" type="text/css">
+    <link rel="stylesheet" type="text/css" href="{% static 'honey/css/contact.css' %}">
+    <link rel="stylesheet" type="text/css" href="{% static 'honey/css/contact_responsive.css' %}">
+    <link href="https://cdn.jsdelivr.net/npm/remixicon@2.5.0/fonts/remixicon.css" rel="stylesheet"/>
+    <link rel="stylesheet" href="{% static 'honey/css/cont.css' %}" />
+    </head>
+    <body>
+
+    <div class="super_container">
 
 
+        <!-- Contact -->
 
-{#						<form method="post" class="intro_form" id="">#}
-{#                        {% csrf_token %}#}
-{#                        {{ form.as_p }}#}
-{#                            <div class="form-error">{{ form.non_field_errors }}</div>#}
-{#                                <div class="d-flex flex-row align-items-start justify-content-between flex-wrap">#}
-{#                                    {% for f in form %}#}
-{#                                        <p><label class="form-label" for="{{ f.id_for_label }}">{{f.label}}: </label>{{ f }}</p>#}
-{#                                        <div class="form-error">{{ f.errors }}</div>#}
-{#                                    {% endfor %}#}
-{#                                </div>#}
-{#							<button class="button button_1 intro_button trans_200">Байланысу</button>#}
-{#						</form>#}
-					</div>
-				</div>
+        <div class="contact">
+            <div class="container">
+                <div class="row">
+
+                    <!-- Contact Form -->
+                    <div class="col-lg-9">
+                        <div class="contact_form_container">
+                            <div class="contact_form_title">Байланысу үшін</div>
+                                <div class="col-lg-8 contact_col">
+                                    <div class="contact_content">
+                                        <div class="contact_content_title"> Бізбен байланыс 24/7</div>
+                                        <div class="contact_content_text">
+                                            <p>Cұрағыңыз туындаған жағдайда, бізбен хабарласыңыз. Біз сіздің кез-келген туындаған сұрағыңыздың жауабын шешеміз.</p>
+                                        </div>
+                                        <div class="direct_line d-flex flex-row align-items-center justify-content-start">
+                                            <div class="direct_line_title text-center">Call center:</div>
+                                            <div class="direct_line_num text-center">+7 727 377 20 65</div>
+                                        </div>
+                                        <div class="contact_info">
+                                            <ul>
+                                                <li class="d-flex flex-row align-items-start justify-content-start">
+                                                    <div style="margin-right: 80px">Мекенжайымыз:</div>
+                                                    <div> Жандосов көшесі, 55</div>
+                                                </li>
+                                                <li class="d-flex flex-row align-items-start justify-content-start">
+                                                    <div style="margin-right: 80px">Телефон нөмірі:</div>
+                                                    <div>+7 (777) 388-79-79 </br> +7 (707) 979-55-79</div>
+
+                                                </li>
+                                                <li class="d-flex flex-row align-items-start justify-content-start">
+                                                    <div style="margin-right: 80px">Электрондық пошта:</div>
+                                                    <div>honeyskin@gmail.com</div>
+                                                </li>
+                                            </ul>
+                                        </div>
+                                        <div class="contact_social">
+                                            <h3> Біздің әлеуметтік желілер </h3>
+                                                <ul class="d-flex flex-row align-items-center justify-content-start">
+                                                    <li><a href="https://ru.pinterest.com/heyhoney/"><i class="fa fa-pinterest" aria-hidden="true"></i></a></li>
+                                                    <li><a href="https://api.whatsapp.com/send/?phone=%2B77064203395&text&type=phone_number&app_absent=0"><i class="fa fa-whatsapp" aria-hidden="true"></i></a></li>
+                                                    <li><a href="https://twitter.com/"><i class="fa fa-twitter" aria-hidden="true"></i></a></li>
+                                                    <li><a href="https://instagram.com/honeyskin.kz?igshid=YmMyMTA2M2Y="><i class="fa fa-instagram" aria-hidden="true"></i></a></li>
+                                                    <li><a href="@KerbezLady_Bot"><i class="fa fa-telegram" aria-hidden="true"></i></a></li>
+                                                    <li><a href="https://www.linkedin.com/feed/"><i class="fa fa-linkedin" aria-hidden="true"></i></a></li>
+                                                </ul>
+                                        </div>
+                        </div>
+                    </div>
+
+                        </div>
+                    </div>
+
+                    <!-- Contact Content -->
+                </div>
             </div>
         </div>
+
+
+
     </div>
+{#</body>#}
 
-{#<section class="container">#}
-{#			<h2 class="title">#}
-{#				<span class="primary">Meet our team</span>#}
-{#				<span class="secondary">#}
-{#					These individuals work together to make [company name] function.#}
-{#				</span>#}
-{#			</h2>#}
-{#			<div class="gallery-wrapper">#}
-{#				<figure class="gallery-item">#}
-{#					<img src="./images/portrait-female-1.jpg" alt="" class="item-image" />#}
-{#					<figcaption class="item-description">#}
-{#						<h2 class="name">Jane Doe</h2>#}
-{#						<span class="role">Director</span>#}
-{#					</figcaption>#}
-{#				</figure>#}
-{#				<figure class="gallery-item">#}
-{#					<img src="./images/portrait-female-2.jpg" alt="" class="item-image" />#}
-{#					<figcaption class="item-description">#}
-{#						<h2 class="name">Jane Doe</h2>#}
-{#						<span class="role">Marketing</span>#}
-{#					</figcaption>#}
-{#				</figure>#}
-{#				<figure class="gallery-item">#}
-{#					<img src="./images/portrait-male-1.jpg" alt="" class="item-image" />#}
-{#					<figcaption class="item-description">#}
-{#						<h2 class="name">John Doe</h2>#}
-{#						<span class="role">Finance</span>#}
-{#					</figcaption>#}
-{#				</figure>#}
-{#				<figure class="gallery-item">#}
-{#					<img src="./images/portrait-male-2.jpg" alt="" class="item-image" />#}
-{#					<figcaption class="item-description">#}
-{#						<h2 class="name">John Doe</h2>#}
-{#						<span class="role">Operations</span>#}
-{#					</figcaption>#}
-{#				</figure>#}
-{#				<figure class="gallery-item">#}
-{#					<img src="./images/portrait-female-3.jpg" alt="" class="item-image" />#}
-{#					<figcaption class="item-description">#}
-{#						<h2 class="name">Jane Doe</h2>#}
-{#						<span class="role">Human resources</span>#}
-{#					</figcaption>#}
-{#				</figure>#}
-{#			</div>#}
-{#		</section>#}
+{#</html>#}
+{##}
+{#	<head>#}
+{#		<meta charset="UTF-8" />#}
+{#		<meta http-equiv="X-UA-Compatible" content="IE=edge" />#}
+{#		<meta name="viewport" content="width=device-width, initial-scale=1.0" />#}
+{#		<link href="https://cdn.jsdelivr.net/npm/remixicon@2.5.0/fonts/remixicon.css" rel="stylesheet"/>#}
+{#		<link rel="stylesheet" href="{% static 'honey/css/cont.css' %}" />#}
+{#	</head>#}
+{#	<body>#}
+    <section class="faq container" aria-label="Frequently Asked Questions">
+			<header class="faq__header">
+				<h2 class="faq__header-title">Жиі қойылатын сұрақтар</h2>
+			</header>
+			<div class="faq__body">
+				<details aria-expanded="true" class="faq__panel" open>
+					<summary class="faq__label">Honeyskin-нің басқалардан айырмашылығы неде?</summary>
+					<div class="faq__panel-body">
+						<p class="faq__panel-answer">
+							Honey skin сіздің теріңізге және шашыңызға пайдалы, бақытты және салауатты өмір салтын ұстануға көмектесетін жоғары сапалы және мұқият жасалған өнімдерді жасайды. Біздің тері мен шаш күтімі өнімдері теріге пайдалы және бас терісін тыныштандыратын өсімдік компоненттері мен маңызды қоректік заттардың Мұқият балансын қолдана отырып жасалған.
+Мүмкін болатын ең жақсы нәтижеге қол жеткізу үшін біз үнемі жаңашылдық жасаймыз және жаңа өнімдер жасаймыз, сонымен бірге сіздің күнделікті өміріңізге сәйкес келетін жоғары сапалы өнімдерді алу үшін қолданыстағы формулаларды жетілдіреміз.
+						</p>
+					</div>
+				</details>
+				<details aria-expanded="false" class="faq__panel">
+					<summary class="faq__label">
+						Тегін жеткізу құны қандай?
+					</summary>
+					<div class="faq__panel-body">
+						<p class="faq__panel-answer">
+							Тегін жеткізу тапсырыс құны 10000 тг ден басталады.
+						</p>
+					</div>
+				</details>
+				<details aria-expanded="false" class="faq__panel">
+					<summary class="faq__label">
+						Тапсырысты алу үшін қандай құжаттарды ұсынуым керек?
+					</summary>
+					<div class="faq__panel-body">
+						<p class="faq__panel-answer">
+							Курьерлік қызметке жеке куәлікті көрсету қажет.
+                            Қазпоштада жеке куәлік пен пошта хабарламасын көрсету қажет.
+						</p>
+					</div>
+				</details>
+				<details aria-expanded="false" class="faq__panel">
+					<summary class="faq__label">Сіздің өнімдеріңіз сезімтал теріге және шашқа қауіпсіз бе?</summary>
+					<div class="faq__panel-body">
+						<p class="faq__panel-answer">
+							Иә! Honey skin өнімдерінің барлығы сенімді көздерден жасалған, яғни біз таза косметикамыз. Ықтимал зиянды химиялық заттар, парабендер, сульфаттар, минералды майлар, алкоголь, хош иістер, SLS және SLES қоспалары, фталаттар мен формальдегидсіз жасалған.
+                            Біз тек медициналық сапалы табиғи ингредиенттерді қолданамыз, бұл біздің өнімдерімізді барлық тері мен шаш түрлеріне тамаша етеді. Нәзік тыныштандыратын және табиғи ингредиенттерге бай композиция оларды бүкіл отбасы үшін, әсіресе сезімтал және құрғақ терісі бар адамдар үшін қолайлы етеді.
+						</p>
+					</div>
+				</details>
+			</div>
+		</section>
 
-{##}
-{##}
-{##}
-{##}
-{##}
-{##}
-{##}
-{##}
-{#<form method="post">#}
-{#  {% csrf_token %}#}
-{##}
-{#    <div class="form-error">{{ form.non_field_errors }}</div>#}
-{##}
-{#{% for f in form %}#}
-{#<p><label class="form-label" for="{{ f.id_for_label }}">{{f.label}}: </label>{{ f }}</p>#}
-{#<div class="form-error">{{ f.errors }}</div>#}
-{#{% endfor %}#}
-{##}
-{##}
-{#    <button type="submit">Отправить</button>#}
-{#</form>#}
-{##}
-{% endblock %}
+    <script>
+			const panels = document.querySelectorAll('.faq__panel')
+			const panelLabels = document.querySelectorAll('.faq__label')
+			panels.forEach((panel, index) => {
+				let isExpanded = panel.getAttribute('aria-expanded') === 'true'
+
+				panelLabels[index].addEventListener('click', () => {
+					console.log('clicked')
+					isExpanded = !isExpanded
+					panel.setAttribute('aria-expanded', isExpanded)
+				})
+			})
+		</script>
+	</body>
+</html>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    {% endblock %}

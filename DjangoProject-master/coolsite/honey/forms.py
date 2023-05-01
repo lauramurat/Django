@@ -43,13 +43,6 @@ class LoginUserForm(AuthenticationForm):
         username = forms.CharField(label='Логин', widget=forms.TextInput(attrs={'class': 'form-input'}))
         password = forms.CharField(label='Пароль', widget=forms.PasswordInput(attrs={'class': 'form-input'}))
 
-    # name = forms.CharField(max_length=255, label="Аты", widget=forms.TextInput(attrs={'class': 'form-input'}))
-    # slug = forms.SlugField(max_length=255, label="URL")
-    # brand = forms.CharField(widget=forms.Textarea(attrs={'cols':60,'rows':10}), label="Бренд")
-    # content = forms.CharField(widget=forms.Textarea(attrs={'cols':60,'rows':10}), label="Контент")
-    # price = forms.CharField(max_length=255, label="Багасы")
-    # is_published = forms.BooleanField(label="Публикация", required=False, initial=True)
-    # cat = forms.ModelChoiceField(queryset=Category.objects.all(), label="Категориялар",  empty_label="Категория тандалмады")
 
 class BailanysForm(forms.Form):
 
@@ -63,29 +56,18 @@ class BailanysForm(forms.Form):
         }
 
         def clean_name(self):
-            name = self.cleaned_data['title']
+            name = self.cleaned_data['name']
             if len(name) > 200:
                 raise ValidationError('Dlina prevyshaet 200 simvolov')
             return name
 
 
-#
-# class BailanysForm(forms.ModelForm):
-#     def __init__(self, *args, **kwargs):
-#         super().__init__(*args, **kwargs)
-#
-#     class Meta:
-#         model = Bailanys
-#         fields = ['name', 'email', 'phone', 'content']
-#         widgets = {
-#             'name': forms.TextInput(attrs={'class': 'form-input'}),
-#             'email': forms.Textarea(attrs={'cols': 60, 'rows': 10}),
-#             'phone': forms.Textarea(attrs={'cols': 60, 'rows': 10}),
-#             'content': forms.Textarea(attrs={'cols': 60, 'rows': 10}),
-#         }
-#
-#         def clean_name(self):
-#             name = self.cleaned_data['title']
-#             if len(name) > 200:
-#                 raise ValidationError('Dlina prevyshaet 200 simvolov')
-#             return name
+
+class NewsForm(forms.ModelForm):
+    class Meta:
+        model = New
+        fields = ['email']
+
+        widgets = {
+            'email': forms.EmailInput(attrs={'class': 'form-input'}),
+        }

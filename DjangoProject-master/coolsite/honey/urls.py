@@ -12,6 +12,7 @@ urlpatterns = [
     # path('bailanys/', Bailanys.as_view(), name='bailanys'),
     path('blog/', blog, name='blog'),
     path('cont/', AddBailanys.as_view(), name='contact'),
+    path('news/', News.as_view(), name='news'),
     path('login/', LoginUser.as_view(), name='login'),
     path('logout/', logout_user, name='logout'),
     path('registeer/', RegisterUser.as_view(), name='register'),

@@ -17,6 +17,10 @@
 <link href="{% static 'honey/css/plugins/jquery-datepicker/jquery-ui.css' %}" rel="stylesheet" type="text/css">
 <link rel="stylesheet" type="text/css" href="{% static 'honey/css/main_styles.css' %}">
 <link rel="stylesheet" type="text/css" href="{% static 'honey/css/responsive.css' %}">
+<link href="{% static 'honey/css/plugins/font-awesome-4.7.0/css/font-awesome.min.css' %}" rel="stylesheet" type="text/css">
+<link rel="stylesheet" type="text/css" href="{% static 'honey/css/contact.css' %}">
+<link rel="stylesheet" type="text/css" href="{% static 'honey/css/buy.css' %}">
+<link rel="stylesheet" type="text/css" href="{% static 'honey/css/contact_responsive.css' %}">
 </head>
 <body>
 
@@ -51,81 +55,12 @@
                     {% endif %}
 				</ul>
 			</nav>
-			<div class="header_extra d-flex flex-row align-items-center justify-content-end ml-auto">
-				<div class="social header_social">
-					<ul class="d-flex flex-row align-items-center justify-content-start">
-						<li><a href="#"><i class="fa fa-instagram" aria-hidden="true"></i></a></li>
-						<li><a href="#"><i class="fa fa-facebook" aria-hidden="true"></i></a></li>
-						<li><a href="#"><i class="fa fa-twitter" aria-hidden="true"></i></a></li>
-					</ul>
-				</div>
-			</div>
+
 		</div>
 	</header>
-
-	<!-- Menu -->
-
-{#	<div class="menu_overlay trans_400"></div>#}
-{#	<div class="menu trans_400">#}
-{#		<div class="menu_close_container"><div class="menu_close"><div></div><div></div></div></div>#}
-{#		<nav class="menu_nav">#}
-{#			<ul>#}
-{#				<li><a href="index.html">Home</a></li>#}
-{#				<li><a href="about.html">About us</a></li>#}
-{#				<li><a href="services.html">Services</a></li>#}
-{#				<li><a href="blog.html">News</a></li>#}
-{#				<li><a href="bailanys.html">Contact</a></li>#}
-{#			</ul>#}
-{#		</nav>#}
-{#		<div class="menu_extra">#}
-{#			<div class="menu_link">Mo - Sat: 8:00am - 9:00pm</div>#}
-{#			<div class="menu_link">+34 586 778 8892</div>#}
-{#			<div class="menu_link"><a href="#">Make an appointment</a></div>#}
-{#		</div>#}
-{#		<div class="social menu_social">#}
-{#			<ul class="d-flex flex-row align-items-center justify-content-start">#}
-{#				<li><a href="#"><i class="fa fa-instagram" aria-hidden="true"></i></a></li>#}
-{#				<li><a href="#"><i class="fa fa-facebook" aria-hidden="true"></i></a></li>#}
-{#				<li><a href="#"><i class="fa fa-twitter" aria-hidden="true"></i></a></li>#}
-{#			</ul>#}
-{#		</div>#}
-{#	</div>#}
-
-{#<!-- Блок контента -->#}
-{#<div class="content-text">#}
 {% block content %}
 {% endblock %}
-{#    {% if page_obj.has_other_pages %}#}
-{#<nav class="list-pages">#}
-{#    <ul>#}
-{#{% if page_obj.has_previous %}#}
-{#<li class="page-num">#}
-{#    <a href="?page={{ page_obj.previous_page_number }}">&lt;</a>#}
-{#</li>#}
-{#{% endif %}#}
-{##}
-{#        {% for p in paginator.page_range %}#}
-{#        {% if page_obj.number == p %}#}
-{#        <li class="page-num page-num-selected">{{ p }}</li>#}
-{#        {% elif p >= page_obj.number|add:-2 and p <= page_obj.number|add:2 %}#}
-{#        <li class="page-num">#}
-{#            <a href="?page={{ p }}">{{ p }}</a>#}
-{#        </li>#}
-{#        {% endif %}#}
-{#        {% endfor %}#}
-{#{% if page_obj.has_next %}#}
-{#<li class="page-num">#}
-{#    <a href="?page={{ page_obj.next_page_number }}">&gt;</a>#}
-{#</li>#}
-{#{% endif %}#}
-{##}
-{#    </ul>#}
-{#</nav>#}
-{#{% endif %}#}
-{#	</div>#}
-<!-- Конец блока контента -->
 
-	<!-- Footer -->
 
 	<footer class="footer">
 		<div class="footer_content">
@@ -245,7 +180,7 @@ Copyright &copy;<script>document.write(new Date().getFullYear());</script> All r
 <script src="{% static 'honey/css/plugins/parallax-js-master/parallax.min.js' %}"></script>
 <script src="{% static 'honey/css/plugins/jquery-datepicker/jquery-ui.js' %}"></script>
 <script src="{% static 'honey/js/custom.js' %}"></script>
-
+<script src="{% static 'honey/js/contact.js' %}"></script>
 <!-- Global site tag (gtag.js) - Google Analytics -->
 <script async src="https://www.googletagmanager.com/gtag/js?id=UA-23581568-13"></script>
 <script>

@@ -1,0 +1,56 @@
+/* ======================== */
+/*
+    Ignore the following styles. They are not important to achieve the effect.
+    I'm only using them for looks (overall page background/font styles/centering content).
+*/
+@import url('https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Poppins:wght@300;400;700&display=swap');
+
+
+
+*,
+*::before,
+::after {
+	margin: 0;
+	padding: 0;
+	box-sizing: border-box;
+}
+html,
+body {
+	height: 100%;
+}
+body {
+	font-family: 'Poppins', sans-serif;
+	font-weight: 300;
+	background-color: #141416;
+}
+
+/* ======================== */
+.container {
+	max-width: 980px;
+	margin-inline: auto;
+	padding: 100px 15px;
+}
+.faq__header-title {
+	font-size: clamp(26px, 5vw, 40px);
+	color: #fff;
+	margin-bottom: 30px;
+}
+.faq__panel {
+	padding: 7px 21px;
+	margin-bottom: 24px;
+	border: 1px solid #777e91;
+	border-radius: 8px;
+}
+.faq__label {
+	padding-block: 7px;
+	color: #f4f5f6;
+	cursor: pointer;
+}
+.faq__label:hover {
+	color: #3b71fe;
+}
+.faq__panel-answer {
+	color: #777e91;
+	padding-top: 5px;
+	padding-bottom: 7px;
+}

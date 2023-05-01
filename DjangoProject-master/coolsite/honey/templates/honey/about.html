@@ -21,16 +21,16 @@
 
 	<div class="home d-flex flex-column align-items-start justify-content-end">
         {% load static %}
-		<!-- <div class="background_image" style="background-image:url(images/about.jpg)"></div> -->
-		<div class="parallax_background parallax-window" data-parallax="scroll" data-image-src="{% static 'honey/images/aboutt.jpg' %}" data-speed="0.8"></div>
+{#		<div class="background_image" style="background-image:url(images/about.jpg)"></div>#}
+		<div class="parallax_background parallax-window" data-parallax="scroll" data-image-src="{% static 'honey/images/img_2.png' %}"></div>
 		<div class="home_overlay"><img src="{% static 'honey/images/home_overlay.png' %}" alt="Biz jaily"></div>
 		<div class="home_container">
 			<div class="container">
 				<div class="row">
 					<div class="col">
-						<div class="home_content" style="margin-bottom: 490px">
+						<div class="home_content" >
 							<div class="home_title" >Біз жайлы</div>
-							<div class="home_text">Біздің сайт теріңізге және шашыңызға пайдалы әрі бақытты және салауатты өмір салтын сақтауға көмектеседі.</div>
+                            <div class="home_text"><h6>Біздің сайт теріңізге және шашыңызға пайдалы әрі бақытты және салауатты өмір салтын сақтауға көмектеседі.</h6></div>
 						</div>
 					</div>
 				</div>
@@ -98,8 +98,8 @@
 				</div>
 
 				<!-- Intro Image -->
-				<div class="col-lg-3 offset-lg-1">
-					<div class="intro_image"><img src="{% static 'honey/images/intro_1.jpg' %}" alt=""></div>
+				<div class="col-lg-3">
+					<div class="intro_image"><img src="{% static 'honey/images/h.jpg' %}" width="450px" height="400px"></div>
 				</div>
 			</div>
 		</div>
@@ -108,28 +108,33 @@
 
 	<!-- Team -->
 
-	<div class="team">
+	<div class="team" style="margin-bottom: 100px">
 		<div class="container">
 			<div class="row">
 				<div class="col">
 					<div class="section_title_container text-center">
 						<div class="section_subtitle">Honey Skin</div>
-						<div class="section_title"><h2>Біздің мамандар</h2></div>
+						<div class="section_title" style="margin-top: 20px; margin-bottom: 100px"><h2>Біздің мамандар</h2></div>
 					</div>
 				</div>
 			</div>
 			<div class="row team_row">
 
 				<!-- Team Item -->
-				<div class="col-lg-4 team_col">
+				<div class="col-lg-4 team_col" >
 					<div class="team_item text-center d-flex flex-column aling-items-center justify-content-end">
-						<div class="team_image"><img src="{% static 'honey/images/team_1.jpg' %}" alt=""></div>
+						<div class="team_image"><img src="{% static 'honey/images/eka.jpg' %}" alt="" width="300px" height="400px"></div>
 						<div class="team_content text-center">
-							<div class="team_name"><a href="#">Michael Smith</a></div>
-							<div class="team_title">Plastic Surgeon</div>
+							<div class="team_name" style="margin-top: 20px"><a href="#">Раненко Екатерина Валерьевна</a></div>
+							<div class="team_title">Қызмет атауы: Дерматолог, Дерматовенеролог</div>
 							<div class="team_text">
-								<p>Odio ultrices ut. Etiam ac erat ut enim maximus accumsan vel ac nisl. Duis feugiat bibendum orci, non elementum urna.</p>
+                                <p>Тәжірибе: 10 жыл</p>
 							</div>
+                            <div>
+								<li><a href="https://api.whatsapp.com/send/?phone=%2B77064203395&text&type=phone_number&app_absent=0"><i class="fa fa-whatsapp" aria-hidden="true"></i></a></li>
+                                <li><a href="tel:+7 (925) 826-81-99"><i class="fa fa-phone" aria-hidden="true"></i></a></li>
+								<li><a href="https://instagram.com/dr.ranenko?igshid=YmMyMTA2M2Y="><i class="fa fa-instagram" aria-hidden="true"></i></a></li>
+                            </div>
 						</div>
 					</div>
 				</div>
@@ -137,13 +142,18 @@
 				<!-- Team Item -->
 				<div class="col-lg-4 team_col">
 					<div class="team_item text-center d-flex flex-column aling-items-center justify-content-end">
-						<div class="team_image"><img src="{% static 'honey/images/team_2.jpg' %}" alt=""></div>
+						<div class="team_image"><img src="{% static 'honey/images/cos.png' %}" width="300px" height="400px" alt=""></div>
 						<div class="team_content text-center">
-							<div class="team_name"><a href="#">Samantha Doe</a></div>
-							<div class="team_title">Plastic Surgeon</div>
+							<div class="team_name" style="margin-top: 20px"><a href="#">Арынова Гульназия Угубаевна</a></div>
+							<div class="team_title">Қызмет атауы: Косметолог</div>
 							<div class="team_text">
-								<p>Ultrices ut. Etiam ac erat ut enim maximus accumsan vel ac nisl. Duis feugiat bibendum orci, non elementum urna.</p>
+                                <p>Тәжірибе: 28 жыл</p>
 							</div>
+                             <div>
+								<li><a href="https://api.whatsapp.com/send/?phone=%2B77064203395&text&type=phone_number&app_absent=0"><i class="fa fa-whatsapp" aria-hidden="true"></i></a></li>
+                                <li><a href="tel:+77059160728"><i class="fa fa-phone" aria-hidden="true"></i></a></li>
+								<li><a href="https://instagram.com/dermatologist_almaty?igshid=YmMyMTA2M2Y="><i class="fa fa-instagram" aria-hidden="true"></i></a></li>
+                            </div>
 						</div>
 					</div>
 				</div>
@@ -151,13 +161,18 @@
 				<!-- Team Item -->
 				<div class="col-lg-4 team_col">
 					<div class="team_item text-center d-flex flex-column aling-items-center justify-content-end">
-						<div class="team_image"><img src="{% static 'honey/images/team_3.jpg' %}" alt=""></div>
+						<div class="team_image"><img src="{% static 'honey/images/de1.jpg' %}"  width="300px" height="400px"  alt=""></div>
 						<div class="team_content text-center">
-							<div class="team_name"><a href="#">James Carl</a></div>
-							<div class="team_title">Plastic Surgeon</div>
+							<div class="team_name" style="margin-top: 20px"><a href="#">Нурланова Гульжан Сапаргалиевна</a></div>
+							<div class="team_title">Диетолог, Эндокринолог</div>
 							<div class="team_text">
-								<p>Etiam ac erat ut enim maximus accumsan vel ac nisl. Duis feugiat bibendum orci, non elementum urna. Odio ultrices ut.</p>
+                                <p>Тәжірибе: 30 жыл</p>
 							</div>
+                             <div>
+								<li><a href="https://api.whatsapp.com/send/?phone=%2B77064203395&text&type=phone_number&app_absent=0"><i class="fa fa-whatsapp" aria-hidden="true"></i></a></li>
+                                <li><a href="tel:+77759812774"><i class="fa fa-phone"></i></a></li>
+								<li><a href="https://instagram.com/nurlanova_guljan?igshid=YmMyMTA2M2Y="><i class="fa fa-instagram" aria-hidden="true"></i></a></li>
+                            </div>
 						</div>
 					</div>
 				</div>

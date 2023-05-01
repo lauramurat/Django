@@ -1,0 +1,60 @@
+body{
+  margin: 0;
+  padding: 0;
+  background: white;
+  font-family: "Arial";
+}
+
+.share{
+  width: 200px;
+  height: 200px;
+  margin: 5em auto;
+  background: #fff;
+  text-align: center;
+  border-radius: 50px / 5px;
+  overflow: hidden;
+  position: relative;
+}
+
+.share a{
+  display: inline-block;
+  width: 100px;
+  height: 200px;
+  float: left;
+  position: relative;
+  text-indent: -9999px;
+  z-index: 9999;
+}
+
+.share:after{
+  content: "Satyp alu ushin!";
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: 40%;
+  font-size: 25px;
+  font-weight: normal;
+  font-style: italic;
+  text-transform: uppercase;
+  color: #333;
+}
+
+.share a.fb{
+  background: #33FF90 url(https://cdn3.iconfinder.com/data/icons/2018-social-media-logotypes/1000/2018_social_media_popular_app_logo-whatsapp-64.png) no-repeat center;
+  top: -200px;
+  transition: all 0.3s ease-in-out;
+}
+
+.share a.tw{
+  background: #C13584 url(https://cdn3.iconfinder.com/data/icons/2018-social-media-logotypes/1000/2018_social_media_popular_app_logo_instagram-64.png) no-repeat center;
+  bottom: -200px;
+  transition: all 0.3s ease-in-out;
+}
+
+.share:hover a.fb{
+  top: 0;
+}
+
+.share:hover a.tw{
+  bottom: 0;
+}

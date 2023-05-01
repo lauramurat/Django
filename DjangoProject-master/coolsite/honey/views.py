@@ -63,23 +63,6 @@ class ProductHome(DataMixin, ListView):
     def get_queryset(self):
         return Product.objects.filter(is_published = True).select_related('cat')
 
-# def index(request):
-#     posts = Product.objects.all()
-#     cats = Category.objects.all()
-#     context = {
-#         'posts': posts,
-#         'cats': cats,
-#         'menu': menu,
-#         'title':'Basty bet',
-#         'cat_selected':0,
-#     }
-#     return render(request, 'honey/index.html', context=context)
-# @login_required
-
-
-# def blog(request):
-#     return HttpResponse("Blog")
-
 class AddBailanys(DataMixin, FormView):
     form_class = BailanysForm
     template_name = 'honey/bailanys.html'
@@ -90,9 +73,9 @@ class AddBailanys(DataMixin, FormView):
         c_def = self.get_user_context(title="Bailanys")
         return dict(list(context.items()) + list(c_def.items()))
 
-    def form_valid(self, form):
-        bailanys = form.save()
-        return redirect('home')
+    # def form_valid(self, form):
+    #     bailanys = form.save()
+    #     return redirect('home')
 
 def about(request):
     contact_list = Product.objects.all()
@@ -126,9 +109,6 @@ class CosmeticHome(DataMixin, ListView):
     def get_queryset(self):
         return Product.objects.filter(is_published = True).select_related('cat')
 
-
-
-
 class AddProduct(LoginRequiredMixin, DataMixin, CreateView):
     form_class = AddProductForm
     template_name = 'honey/addproduct.html'
@@ -141,17 +121,17 @@ class AddProduct(LoginRequiredMixin, DataMixin, CreateView):
         c_def = self.get_user_context(title = "Add product")
         return dict(list(context.items()) +list(c_def.items()))
 
-# def addproduct(request):
-#     if request.method == 'POST':
-#         form = AddProductForm(request.POST, request.FILES)
-#         if form.is_valid():
-#                 form.save()
-#                 return redirect('home')
-#     else:
-#         form = AddProductForm()
-#     return render(request, 'honey/addproduct.html', {'menu':menu,'form':form, 'title' : 'Продукт қосу'})
-#
+class News(LoginRequiredMixin, DataMixin, CreateView):
+    form_class = NewsForm
+    template_name = 'honey/blog.html'
+    success_url = reverse_lazy('home')
+    login_url = reverse_lazy('home')
+    raise_exception = True
 
+    def get_context_data(self, *, object_list=None, **kwargs):
+        context = super().get_context_data(**kwargs)
+        c_def = self.get_user_context(title = "Subscribe news")
+        return dict(list(context.items()) +list(c_def.items()))
 
 class ShowPost(DataMixin, DetailView):
     model = Product
@@ -163,22 +143,6 @@ class ShowPost(DataMixin, DetailView):
         context = super().get_context_data(**kwargs)
         c_def = self.get_user_context(title=context['post'])
         return dict(list(context.items()) + list(c_def.items()))
-
-
-
-
-
-# def show_post(request, post_slug):
-#     post = get_object_or_404(Product, slug=post_slug)
-#
-#     context = {
-#         'post': post,
-#         'menu': menu,
-#         'name': post.name,
-#         'cat_selected':post.cat_id,
-#
-#     }
-#     return render(request, 'honey/post.html', context=context)
 
 class ProductCategory(DataMixin, ListView):
     model = Product
@@ -195,25 +159,6 @@ class ProductCategory(DataMixin, ListView):
         c_def = self.get_user_context(title='Категория - ' + str(c.name),
                                       cat_selected=c.pk)
         return dict(list(context.items()) + list(c_def.items()))
-
-
-
-# def show_category(request, cat_id):
-#     posts = Product.objects.filter(cat_id=cat_id)
-#
-#     if len(posts) == 0:
-#         raise Http404()
-#
-#
-#     context = {
-#         'posts': posts,
-#         'menu': menu,
-#         'title': 'Basty bet',
-#         'cat_selected': cat_id,
-#     }
-#     return render(request, 'honey/index.html', context=context)
-
-
 
 class RegisterUser(DataMixin, CreateView):
     form_class = RegisterUserForm
@@ -239,28 +184,15 @@ class LoginUser(DataMixin, LoginView):
         c_def = self.get_user_context(title="Authentication")
         return dict(list(context.items()) + list(c_def.items()))
 
-    # def get_success_url(self):
-    #     return reverse_lazy('home')
-
-
 def logout_user(request):
     logout(request)
     return redirect('login')
-
-
-
-
-# def login(request):
-#     return HttpResponse("Avtorisaviya")
-
-# def register(request):
-#     return HttpResponse("Tirkelu")
-
 
 def categories(request,category):
     if request.POST:
         print(request.POST)
     return HttpResponse(f"<h1>all categories =) </h1><p>{category}</p>")
+
 
 def archive(request,year):
     if int(year) > 2023:
@@ -270,12 +202,17 @@ def archive(request,year):
     elif int(year) == 2004:
         raise BadRequest()
     return HttpResponse(f"<h1>archives =) </h1><p>{year}</p>")
+
+
 def not_found(request, exception):
     return HttpResponseNotFound('<h1> 404 </h1> <h2> Stranitsa ne naidena! </h2> ')
+
 def closed_access(request, exception):
     return HttpResponseNotFound('<h1>Dostup zakryt!</h1>')
+
 def bad_request(request, exception):
     return HttpResponseBadRequest("<h1>Nevozmozhno obnovit' zapros!</h1>")
+
 def server_error(request):
     return HttpResponseServerError('<h1> Oshibka servera! </h1>')
 
