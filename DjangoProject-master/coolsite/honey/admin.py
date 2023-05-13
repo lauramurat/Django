@@ -8,7 +8,7 @@ class ProductAdmin(admin.ModelAdmin):
     search_fields = ('name','content')
     list_editable = ('is_published',)
     list_filter = ('is_published','time_create')
-    # prepopulated_fields = {"slug ":("name",)}
+    prepopulated_fields = {"slug":("name",)}
 
 
 class CategoryAdmin(admin.ModelAdmin):

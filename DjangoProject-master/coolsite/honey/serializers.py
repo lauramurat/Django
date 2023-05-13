@@ -5,12 +5,6 @@ from .models import Product
 from rest_framework.renderers import JSONRenderer
 from rest_framework.parsers import JSONParser
 
-# class HoneyModel:
-#     def __init__(self, name, content):
-#         self.name = name
-#         self.content = content
-
-
 class HoneySerializer(serializers.ModelSerializer):
     user = serializers.HiddenField(default=serializers.CurrentUserDefault())
     class Meta:

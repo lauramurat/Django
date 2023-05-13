@@ -38,13 +38,6 @@ urlpatterns = [
     path('', include('honey.urls')),
 ]
 
-# handler404 = not_found
-# handler403 = closed_access
-# handler400 = bad_request
-
-
-
-
 if settings.DEBUG:
     import debug_toolbar
 

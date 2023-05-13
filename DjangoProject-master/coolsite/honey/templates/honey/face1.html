@@ -1,0 +1,18 @@
+{% extends 'honey/base.html' %}
+
+{% block content %}
+    <div class="social header_social" style="margin-top: 150px; margin-left: 30px">
+            <ul class="d-flex flex-row align-items-left justify-content-start" >
+            <a href="{% url 'blog' %}">Артқа қайту<i class="fa fa-link" aria-hidden="true"></i></a>
+            </ul>
+    </div>
+    <div class="justify-content-md-center" style="margin-left: 100px; margin-bottom: 100px; margin-top: 40px">
+    <h4>Аты:  {{post.name}}</h4>
+    {% if post.photo %}
+    <p><img class="img-left" src="{{post.photo.url}}" width="500px" height="500px"></p>
+    {% endif %}
+    <p>Бағасы: {{ post.price }} тг </p>
+    <p>Категория: {{ post.cat }}</p>
+    <p>Сипаттамасы: {{post.content}}</p>
+    </div>
+    {% endblock %}

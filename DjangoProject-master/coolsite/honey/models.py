@@ -19,6 +19,8 @@ class Product(models.Model):
     user = models.ForeignKey(User, verbose_name='Polzovatel', on_delete=models.CASCADE)
 
 
+
+
     def __str__(self):
         return self.name
 
