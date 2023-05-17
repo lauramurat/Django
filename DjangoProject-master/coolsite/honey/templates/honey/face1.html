@@ -1,18 +1,59 @@
 {% extends 'honey/base.html' %}
-
+{% load static %}
 {% block content %}
-    <div class="social header_social" style="margin-top: 150px; margin-left: 30px">
+    <div class="social header_social" style="margin-top: 120px; margin-left: 30px">
             <ul class="d-flex flex-row align-items-left justify-content-start" >
-            <a href="{% url 'blog' %}">Артқа қайту<i class="fa fa-link" aria-hidden="true"></i></a>
+            <a class="btn btn-outline-danger" href="{% url 'blog' %}">Артқа қайту</a>
             </ul>
     </div>
-    <div class="justify-content-md-center" style="margin-left: 100px; margin-bottom: 100px; margin-top: 40px">
-    <h4>Аты:  {{post.name}}</h4>
-    {% if post.photo %}
-    <p><img class="img-left" src="{{post.photo.url}}" width="500px" height="500px"></p>
-    {% endif %}
-    <p>Бағасы: {{ post.price }} тг </p>
-    <p>Категория: {{ post.cat }}</p>
-    <p>Сипаттамасы: {{post.content}}</p>
+    <div class="justify-content-md-center" style="margin-left: 100px; margin-bottom: 100px; margin-top: 40px" >
+    <h3>Тері аурулары туралы не білу керек</h3>
+        <p class="article-render__block article-render__block_unstyled" data-points="6" style="font-size: large"><span> Тері проблемалары кез келген жаста болуы мүмкін. Тері ауруының ауыр екенін қалай түсінуге болады және қандай емдеу әдістері әртүрлі жағдайларды жеңуге және жағымсыз белгілерді жоюға көмектеседі</span></p>
+    <h3>Тері аурулары дегеніміз не?</h3>
+        <img src="{% static 'honey/images/face1.jpg' %}" width="700px" height="400px">
+        <p class="article-render__block article-render__block_unstyled" data-points="6" style="font-size: large"><span>Тері ағзаны инфекциялардан қорғайтын ең үлкен орган болып табылады, сонымен қатар көптеген функцияларды орындайды. Кез келген тері ауруы - бұл тітіркенуді, бітелуді немесе қабынуды бастайтын жағдай.
+        Көбінесе мұндай жағдайлар бөртпе немесе басқа ұқсас өзгерістердің пайда болуымен бірге жүреді. Кейбіреулер тез өтеді, ал басқалары әртүрлі жағымсыз белгілерді тудыруы мүмкін. Ең жиі кездесетін тері ауруларына мыналар жатады:
+ </span></p>
+            <ul class="list-unstyled" style="font-size: large">
+              <li> · Безеу</li>
+              <li> · Экзема</li>
+              <li> · Витилиго</li>
+              <li> · Розацея</li>
+              <li> · Тері ісігі</li>
+            </ul>
+    <h3>Тері ауруларының даму себептері</h3>
+    <img src="{% static 'honey/images/face2.jpg' %}" width="700px" height="400px">
+        <p class="article-render__block article-render__block_unstyled" data-points="6" style="font-size: large"><span> Тері ауруларын қоздыратын бірқатар факторлар бар. Сонымен, ең көп таралған себептер:
+        </span></p>
+    <ul class="list-unstyled" style="font-size: large">
+      <li> · Тесіктерге немесе шаш фолликулаларына енген бактериялар</li>
+      <li> · Қалқанша безіне, бүйрекке немесе иммундық жүйеге қатысты жағдайлар</li>
+      <li> · Генетика</li>
+      <li> · Кейбір препараттардың жанама әсерлері</li>
+      <li> · Қант диабеті</li>
+      <li> · Күн сәулесі</li>
+    </ul>
+    <h3>Диагностика</h3>
+    <img src="{% static 'honey/images/face3.jpg' %}" width="700px" height="400px">
+        <p class="article-render__block article-render__block_unstyled" data-points="9"><span> Дәрігер визуалды тексеру арқылы ауруды анықтай алады. Егер науқастың терісінің сыртқы түрі нақты жауап бермесе, онда келесі зерттеулер қолданылады:
+        </span></p>
+    <ul class="list-unstyled" style="font-size: large">
+      <li>·  Биопсия: микроскоппен зерттеу үшін терінің кішкене бөлігін алып тастау</li>
+      <li>·  Патч сынағы: Аллергиялық реакцияларды тексеру үшін теріге аллергеннің аз мөлшерін жағу</li>
+      <li>· Диоскопия: терінің зақымдалған аймағына микроскоптың слайдын басу.</li>
+      <li>· Дермоскопия: терінің зақымдалуын диагностикалау үшін арнайы құрылғыны қолдану.</li>
+    </ul>
+    <h3>Емдеу</h3>
+    <img src="{% static 'honey/images/face4.jpg' %}" width="700px" height="400px">
+        <p class="article-render__block article-render__block_unstyled" data-points="9"><span> Көптеген тері проблемалары емдеуге жақсы жауап береді. Жағдайға байланысты дерматолог немесе басқа маман мыналарды ұсынады:
+        </span></p>
+    <ul class="list-unstyled" style="font-size: large">
+      <li>·  Дәрілік кремдер, жақпа немесе гельдер </li>
+      <li>·  Теріні лазермен қалпына келтіру</li>
+      <li>·  Стероидты таблеткалар немесе кремдер</li>
+      <li>·  Хирургиялық процедуралар.</li>
+      <li>·  Гигиеналық ережелерді, соның ішінде дұрыс тері күтімін сақтау.</li>
+    </ul>
+
     </div>
-    {% endblock %}
+{% endblock %}

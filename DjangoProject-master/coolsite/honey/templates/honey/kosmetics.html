@@ -1,7 +1,26 @@
 {% extends 'honey/base.html' %}
 {% block content %}
 {% load static %}
-<h1>{{title}}</h1>
+    	<div class="home d-flex flex-column align-items-start justify-content-end">
+        {% load static %}
+{#		<div class="background_image" style="background-image:url(images/about.jpg)"></div>#}
+		<div class="parallax_background parallax-window" data-parallax="scroll" data-image-src="{% static 'honey/images/blo.jpg' %}"></div>
+		<div class="home_overlay"><img src="{% static 'honey/images/home_overlay.png' %}" alt=""></div>
+		<div class="home_container">
+			<div class="container">
+				<div class="row">
+					<div class="col">
+						<div class="home_content" >
+							<div class="home_title" >Косметикалар</div>
+                            <div class="home_text"><h6>Ең сапалы бет күтіміне арналған косметикаларды біздің дүкеннен таба аласыз?!</h6></div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+
+
 	<!-- Menu -->
 <div class="card" style="width: 18rem; margin-top: 80px; margin-left: 50px">
     <div class="card-header">
@@ -31,13 +50,12 @@
                 <div class="col-lg-3 d-flex align-items-stretch" style="margin-left: 60px" >
                     <div class="card">
                         {% if p.photo %}
-                           <img class="card-img-top" src="{{p.photo.url}}" alt="">
+                           <img class="card-img-top" style="width: 280px; height: 250px" src="{{p.photo.url}}" alt="">
                         {% endif %}
                         <div class="card-body">
-                            <h6 class="card-title">Аты:{{ p.name }}</h6>
-                            <h7 class="card-title">Категория: {{ p.cat}}</h7>
-                            <br>
-                            <h7 class="card-title">Бағасы: {{ p.price }} тг</h7>
+                            <h5 class="card-title">Аты:{{ p.name }}</h5>
+                            <h5 class="card-title">Категория: {{ p.cat}}</h5>
+                            <h5 class="card-title">Бағасы: {{ p.price }} тг</h5>
                             <br>
 {#                            <p class="card-text">{% autoescape on %} {{p.content|linebreaks|truncatewords:10 }} {% endautoescape %}</p>#}
                             <a href="{{ p.get_absolute_url }}" class="btn btn-primary" style="margin-top: 10px"> Толығырақ </a>

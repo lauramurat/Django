@@ -93,6 +93,10 @@ def blog(request):
     page_obj = paginator.get_page(page_number)
     return render(request, 'honey/blog.html', {'page_obj': page_obj, 'menu': menu, 'title': 'Біз жайлы'})
 
+def face(request):
+    return render(request, 'honey/face1.html', {'menu': menu,'title': 'Біз жайлы'})
+def face2(request):
+    return render(request, 'honey/face2.html', {'menu': menu,'title': 'Blog'})
 
 class CosmeticHome(DataMixin, ListView):
     paginate_by = 3
